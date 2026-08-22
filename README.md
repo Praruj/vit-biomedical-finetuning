@@ -32,7 +32,22 @@ Evaluated on the held-out test split (4,624 images, stratified from the full
 |---|---|
 | Test accuracy | **98.42%** |
 | Test macro F1 | **98.13%** |
-| Training time (T4, 4 epochs) | _TBD — fill in from your Trainer logs_ |
+| Training time (T4, 4 epochs) | **39m 36s** (`train_runtime`: 2376.27s) |
+| Training samples/sec | 62.26 |
+| Final train loss | 0.218 |
+
+**Training curve (validation, per epoch):**
+
+| Epoch | Train Loss | Val Loss | Val Accuracy | Val F1 Macro |
+|---:|---:|---:|---:|---:|
+| 1 | 0.2083 | 0.1307 | 0.9522 | 0.9589 |
+| 2 | 0.1422 | 0.0505 | 0.9814 | 0.9816 |
+| 3 | 0.1085 | 0.0480 | 0.9816 | 0.9820 |
+| 4 | 0.1096 | 0.0370 | 0.9853 | 0.9850 |
+
+Validation metrics improve steadily and loss keeps dropping through epoch 4 —
+more epochs might squeeze out a bit more, but returns are already
+diminishing after epoch 2.
 
 **Per-class breakdown:**
 
