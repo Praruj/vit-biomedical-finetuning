@@ -25,19 +25,35 @@ Face `transformers` `Trainer` API. Trained on a free Colab T4 GPU.
 
 ## Results
 
-> Fill in after running `notebooks/01_finetune_vit.ipynb` — the notebook
-> exports these automatically.
+Evaluated on the held-out test split (4,624 images, stratified from the full
+46,232-image dataset).
 
 | Metric | Value |
 |---|---|
-| Test accuracy | _TBD_ |
-| Test macro F1 | _TBD_ |
-| Training time (T4, 4 epochs) | _TBD_ |
+| Test accuracy | **98.42%** |
+| Test macro F1 | **98.13%** |
+| Training time (T4, 4 epochs) | _TBD — fill in from your Trainer logs_ |
 
-Confusion matrix and misclassified-example plots are saved to `results/` by
-the notebook — `results/confusion_matrix.png`.
+**Per-class breakdown:**
 
-<!-- ![Confusion Matrix](results/confusion_matrix.png) -->
+| Class | Support | Precision | Recall | F1 |
+|---|---:|---:|---:|---:|
+| Basophil | 152 | 0.950 | 0.993 | 0.971 |
+| Eosinophil | 732 | 0.992 | 0.985 | 0.988 |
+| Erythroblast | 155 | 0.981 | 1.000 | 0.990 |
+| Lymphocyte | 793 | 0.978 | 0.995 | 0.986 |
+| Monocyte | 531 | 0.990 | 0.966 | 0.978 |
+| Neutrophil | 1,737 | 0.992 | 0.984 | 0.988 |
+| Plasma cell | 289 | 0.936 | 0.965 | 0.951 |
+| Platelet | 235 | 1.000 | 0.996 | 0.998 |
+
+Plasma cell is the weakest class (precision 0.936) — it's most often confused
+with neutrophil and basophil, which makes sense given morphological overlap
+under the microscope at this resolution. Basophil is the rarest class
+(support 152) and still hits 97%+ F1, suggesting the augmentation strategy
+handled the class imbalance reasonably well.
+
+![Confusion Matrix](results/confusion_matrix.png)
 
 ## Project structure
 
@@ -90,7 +106,7 @@ hardcoded in the notebook, so a run is reproducible by editing one file.
 ### Option B — Local / any environment with a GPU
 
 ```bash
-git clone https://github.com/Praruj/vit-biomedical-finetuning.git
+git clone https://github.com/PRaruj/vit-biomedical-finetuning.git
 cd vit-biomedical-finetuning
 pip install -r requirements.txt
 jupyter notebook notebooks/01_finetune_vit.ipynb
