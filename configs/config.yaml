@@ -1,0 +1,51 @@
+# Configuration for ViT blood cell fine-tuning
+# Referenced from notebooks/01_finetune_vit.ipynb — edit here rather than
+# hardcoding values in the notebook, so the run is easy to reproduce.
+
+model:
+  checkpoint: google/vit-base-patch16-224
+  num_labels: 8
+
+dataset:
+  name: ehottl/blood_dataset
+  train_split: 0.8
+  val_split: 0.1
+  test_split: 0.1
+  seed: 42
+  labels:
+    - basophil
+    - eosinophil
+    - erythroblast
+    - lymphocyte
+    - monocyte
+    - neutrophil
+    - plasma_cell
+    - platelet
+
+preprocessing:
+  image_size: 224
+  train_augmentation:
+    random_resized_crop: true
+    random_horizontal_flip: true
+    random_rotation_degrees: 10
+
+training:
+  output_dir: results/vit-blood-cell-classifier
+  per_device_train_batch_size: 32
+  per_device_eval_batch_size: 32
+  gradient_accumulation_steps: 1
+  num_train_epochs: 4
+  learning_rate: 2.0e-5
+  warmup_ratio: 0.1
+  weight_decay: 0.01
+  fp16: true
+  eval_strategy: epoch
+  save_strategy: epoch
+  logging_steps: 50
+  load_best_model_at_end: true
+  metric_for_best_model: f1_macro
+  save_total_limit: 2
+
+hub:
+  push_to_hub: false
+  repo_id: your-hf-username/vit-blood-cell-classifier

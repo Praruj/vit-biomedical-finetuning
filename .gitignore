@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Environments
+.venv/
+venv/
+
+# Model artifacts (large; don't commit checkpoints to git)
+results/*.bin
+results/*.safetensors
+results/vit-blood-cell-classifier/
+results/checkpoint-*/
+
+# Keep placeholder files and small plots
+!results/.gitkeep
+!results/*.png
+
+# OS
+.DS_Store
