@@ -48,4 +48,4 @@ training:
 
 hub:
   push_to_hub: false
-  repo_id: your-hf-username/vit-blood-cell-classifier
+  repo_id: Praruj/vit-blood-cell-classifier
