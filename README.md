@@ -90,7 +90,7 @@ hardcoded in the notebook, so a run is reproducible by editing one file.
 ### Option B — Local / any environment with a GPU
 
 ```bash
-git clone https://github.com/your-github-username/vit-biomedical-finetuning.git
+git clone https://github.com/Praruj/vit-biomedical-finetuning.git
 cd vit-biomedical-finetuning
 pip install -r requirements.txt
 jupyter notebook notebooks/01_finetune_vit.ipynb
