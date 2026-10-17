@@ -21,7 +21,6 @@ Face `transformers` `Trainer` API. Trained on a free Colab T4 GPU.
 | **Classes** | basophil, eosinophil, erythroblast, lymphocyte, monocyte, neutrophil, plasma cell, platelet |
 | **Framework** | 🤗 `transformers` `Trainer`, `datasets`, `evaluate` |
 | **Hardware** | Google Colab, free-tier T4 GPU |
-| **Demo** | Gradio (local or Hugging Face Spaces) |
 
 ## Results
 
@@ -79,7 +78,7 @@ vit-biomedical-finetuning/
 ├── notebooks/
 │   └── 01_finetune_vit.ipynb      # Main Colab notebook — data, training, eval
 ├── app/
-│   └── gradio_demo.py             # Inference-only demo, deployable to HF Spaces
+│   └── gradio_demo.py             # Optional inference demo
 ├── configs/
 │   └── config.yaml                # All hyperparameters live here
 └── results/                       # Saved model checkpoint, confusion matrix, screenshots
@@ -102,8 +101,6 @@ vit-biomedical-finetuning/
    16GB T4: batch size 32, 4 epochs, `2e-5` learning rate.
 5. **Evaluation** — accuracy, macro F1 (robust to class imbalance),
    per-class precision/recall/F1, and a confusion matrix.
-6. **Demo** — a Gradio app (`app/gradio_demo.py`) for interactive
-   inference, loadable locally or on a Hugging Face Space.
 
 All hyperparameters are centralized in `configs/config.yaml` rather than
 hardcoded in the notebook, so a run is reproducible by editing one file.
@@ -121,22 +118,15 @@ hardcoded in the notebook, so a run is reproducible by editing one file.
 ### Option B — Local / any environment with a GPU
 
 ```bash
-git clone https://github.com/PRaruj/vit-biomedical-finetuning.git
+git clone https://github.com/Praruj/vit-biomedical-finetuning.git
 cd vit-biomedical-finetuning
 pip install -r requirements.txt
 jupyter notebook notebooks/01_finetune_vit.ipynb
 ```
 
-### Run the Gradio demo
+### Optional: inference demo
 
-```bash
-# after training, so results/vit-blood-cell-classifier exists
-python app/gradio_demo.py
-```
-
-Or push the fine-tuned model to the Hugging Face Hub (`hub.push_to_hub:
-true` and `hub.repo_id` in `configs/config.yaml`) and deploy `app/gradio_demo.py`
-directly as a Hugging Face Space.
+After training, `python app/gradio_demo.py` opens a small local inference app. It can also be deployed to Hugging Face Spaces.
 
 ## Notes on scope
 
